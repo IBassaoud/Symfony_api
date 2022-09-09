@@ -4,10 +4,10 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Article;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class DataPersister implements ContextAwareDataPersisterInterface
+class ArticleDataPersister implements ContextAwareDataPersisterInterface
 {
     /**
      * @var EntityManager 
@@ -19,7 +19,7 @@ class DataPersister implements ContextAwareDataPersisterInterface
     private $_slugger;
 
     
-    public function __construct(EntityManager $entityManager, SluggerInterface $slugger)
+    public function __construct(EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
         $this->_entityManager = $entityManager;
         $this->_slugger = $slugger;
@@ -42,7 +42,6 @@ class DataPersister implements ContextAwareDataPersisterInterface
         );
         $this->_entityManager->persist($data);
         $this->_entityManager->flush();
-
     }
 
     public function remove($data, array $context = [])

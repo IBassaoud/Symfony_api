@@ -45,7 +45,7 @@ class Article
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"article:read", "article:write"})
+     * @Groups({"article:read"})
      */
     private $slug;
 
@@ -86,8 +86,9 @@ class Article
 
     public function __construct()
     {
-        $this->isIsPublished = false;
-        $this->datePublished = new \DateTime('now');
+        $this->isPublished = true;
+        $this->datePublished = new \DateTime();
+        $this->dateModif = new \DateTime();
     }
     public function __toString()
     {
