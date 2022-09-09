@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //dans apiresource on peut controler les opérations sur la collection et sur les items
 // @ApiResource(
@@ -30,43 +31,64 @@ class Article
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
+     * @Groups({"article:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"article:read", "article:write"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"article:read", "article:write"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text")
+     * 
+     * @Groups({"article:read", "article:write"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"article:read", "article:write"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * 
+     * @Groups({"article:read"})
      */
     private $isPublished;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({"article:read"})
      */
     private $datePublished;
-
+    
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({"article:read"})
      */
     private $dateModif;
+
+    
+    public function __toString()
+    {
+        return $this->slug;    
+    }
 
     public function getId(): ?int
     {
