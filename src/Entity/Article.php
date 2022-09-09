@@ -84,7 +84,11 @@ class Article
      */
     private $dateModif;
 
-    
+    public function __construct()
+    {
+        $this->isIsPublished = false;
+        $this->datePublished = new \DateTime('now');
+    }
     public function __toString()
     {
         return $this->slug;    
